@@ -31,7 +31,7 @@ public class AR {
 		String qsString;
 		String qsStringSwitch;
 
-		//Le programme n'étant pas générique, la liste des propriétés a traverser est codée en dur dans la requête SQL
+		//Le programme n'Ã©tant pas gÃ©nÃ©rique, la liste des propriÃ©tÃ©s a traverser est codÃ©e en dur dans la requÃªte SQL
 		String sparqlQueryStringComp = "PREFIX efrbroo: <http://erlangen-crm.org/efrbroo/> "+
 				"PREFIX ecrm:  <http://erlangen-crm.org/current/> "+
 				"PREFIX foaf: <http://xmlns.com/foaf/0.1/> "+
@@ -68,13 +68,13 @@ public class AR {
 			qsString = qs.getResource("?m").toString();
 			if(qsString.contains("/ontology#U")||qsString.contains("P3_has_note")){ //Tri les proprietes du Reste (celles qui nous interesse dans le cadre de Doremus sont soit les U__ soit le P3 has note)
 				
-				//on découpe l'url de la propriété afin d'en retirer le nom. Ne marche que pour Doremus, le mieux étant d'aller chercher le label.
+				//on dÃ©coupe l'url de la propriÃ©tÃ© afin d'en retirer le nom. Ne marche que pour Doremus, le mieux Ã©tant d'aller chercher le label.
 				qsStringSwitch=qsString.substring(qsString.lastIndexOf("has")+4).replace("_"," ");
 				if(qsString.contains("had")){
 					qsStringSwitch=qsString.substring(qsString.lastIndexOf("had")+4).replace("_"," ");
 				}
-				//pour une propriete donnee, on ajoute toutes les valeurs lui correspondant dans une seule et meme string, en séparant chaque valeur par "###"
-				//ce qui nous permettra parla suite de récuperer independamment chaque valeur en splittant sur le schema "###"
+				//pour une propriete donnee, on ajoute toutes les valeurs lui correspondant dans une seule et meme string, en sÃ©parant chaque valeur par "###"
+				//ce qui nous permettra parla suite de rÃ©cuperer independamment chaque valeur en splittant sur le schema "###"
 				if(qs.get("?n").isLiteral() && qs.get("?n")!=null){//Si n est un literal
 					temp=addNewStringHashMap(qsStringSwitch,proprietes);
 					temp+=qs.getLiteral("?n").toString()+"###";
@@ -96,7 +96,7 @@ public class AR {
 				}
 			}
 		}
-		//Comptage du nombre d'occurence de propriete pour afficher a l'utilisateur dans l'ordre du + présent au moins présent.
+		//Comptage du nombre d'occurence de propriete pour afficher a l'utilisateur dans l'ordre du + prÃ©sent au moins prÃ©sent.
 		for (String s : proprietes.keySet()){
 			if(!StockageOeuvres.getScoreProp().keySet().contains(s)){
 				StockageOeuvres.getScoreProp().put(s,1.0);

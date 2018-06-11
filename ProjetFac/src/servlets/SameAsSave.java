@@ -19,27 +19,27 @@ import methods.ExportResult;
 
 @SuppressWarnings("serial")
 public class SameAsSave extends HttpServlet {
-	
+
 	HashMap<String,String> checkedBox;
 	ArrayList<String> aEcrire;
 	ExportResult ER;
 	StockageOeuvres so1=new StockageOeuvres();
 
-	//Ceci ne sert que quand TOUTES les oeuvres ont été traitées
+	//Ceci ne sert que quand TOUTES les oeuvres ont Ã©tÃ© traitÃ©es
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
 		aEcrire= new ArrayList<>();
 		aEcrire=StockageOeuvres.getListeTripletResultat();
-		
+
 		try {
 			ER=new ExportResult();
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		//ATTENTION ICI REMPLACER "chemin" PAR LE CHEMINDE STOCKAGE DES RESULTATS !!! 
-		//celui-ci correspond a un fichier .txt qui contient toutes les "oeuvre1, sameAs, oevure2" validées
-		PrintWriter sortie = new PrintWriter(new BufferedWriter(new FileWriter("chemin/resultat.txt")));	
+
+		//ATTENTION ICI REMPLACER "chemin" PAR LE CHEMINDE STOCKAGE DES RESULTATS !!!
+		//celui-ci correspond a un fichier .txt qui contient toutes les "oeuvre1, sameAs, oevure2" validÃ©es
+		PrintWriter sortie = new PrintWriter(new BufferedWriter(new FileWriter("chemin/resultat.txt")));
 
 		for(int i = 0; i < aEcrire.size(); i++){
 			if(aEcrire.get(i)!=null){
@@ -52,33 +52,32 @@ public class SameAsSave extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
-		//ATTENTION ICI REMPLACER "chemin" PAR LE CHEMINDE STOCKAGE DES RESULTATS !!! 
+
+		//ATTENTION ICI REMPLACER "chemin" PAR LE CHEMINDE STOCKAGE DES RESULTATS !!!
 		//celui-ci est le fichier RDF/XML
 		try {
 			ER.outputXMLtoFile(ER.doc, "chemin/resultat.xml");
 		} catch (TransformerException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}		
-		
-		sortie.close();
-		
-		request.setAttribute("reussi", "Fichier sauvegardé avec succès");
-		this.getServletContext().getRequestDispatcher( "/SameAsValidator.jsp" ).forward( request, response );
+		}
 
+		sortie.close();
+
+		request.setAttribute("reussi", "Fichier sauvegardÃ© avec succÃ©s");
+		this.getServletContext().getRequestDispatcher( "/SameAsValidator.jsp" ).forward( request, response );
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
 
 		checkedBox= (HashMap<String, String>) request.getAttribute("checkServ");
 		so1=(StockageOeuvres) request.getAttribute("so1");
-		
+
 		request.setAttribute("checkServ", checkedBox);
 		request.setAttribute("so1", so1);
 		request.setAttribute("listeProp", StockageOeuvres.getListeProp());
-		
+
 		this.getServletContext().getRequestDispatcher( "/SameAsSave.jsp" ).forward( request, response );
 	}
 }

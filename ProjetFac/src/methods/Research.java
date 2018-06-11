@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 public class Research {
 
 	//Pour le filtre : des mots clef et des niveaux d'indice de confiance. Les mots clef sont exclusif: si parmis les proprietes de l'oeuvre, un seul des mots 
-	//est retrouvé, l'oeuvre est ajouté au filtre.
+	//est retrouvÃ©, l'oeuvre est ajoutÃ© au filtre.
 		
 	public static StockageOeuvres filtrage(StockageOeuvres so1, String[] INNERHTML, double filtreIndiceMax, double filtreIndiceMin){
 		StockageOeuvres sof = new StockageOeuvres();

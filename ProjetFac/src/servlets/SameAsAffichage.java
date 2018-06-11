@@ -27,7 +27,7 @@ public class SameAsAffichage extends javax.servlet.http.HttpServlet implements j
 	HashMap<String,String> checkedBox;
 
 	Enumeration<String> names;
-	
+
 	String URI1;
 	String URI2;
 	int start;
@@ -50,7 +50,7 @@ public class SameAsAffichage extends javax.servlet.http.HttpServlet implements j
 	public String[] INNERHTML_RECHERCHE;
 	public String[] INNERHTML_FILTRE;
 
-	public final String messageFinFiltrage="Filtre entièrement traité: fin du filtrage";
+	public final String messageFinFiltrage="Filtre entiÃ¨rement traitÃ©: fin du filtrage";
 
 	double filtreIndiceMin;
 	double filtreIndiceMax;
@@ -65,7 +65,7 @@ public class SameAsAffichage extends javax.servlet.http.HttpServlet implements j
 
 	//ECRITURE
 	ExportResult ER;
-	
+
 	//Recherche
 	String resultat="{";
 	String valeur="";
@@ -90,7 +90,7 @@ public class SameAsAffichage extends javax.servlet.http.HttpServlet implements j
 			} catch (TransformerException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}	
+			}
 		}
 
 		/*INITIALISATION*/
@@ -105,7 +105,7 @@ public class SameAsAffichage extends javax.servlet.http.HttpServlet implements j
 			//init test
 			initFiltrage=true;
 
-			//lastVisited permet de mettre a jour la "progress bar" affichant les 4 derniere oevures visitée + celle en cours
+			//lastVisited permet de mettre a jour la "progress bar" affichant les 4 derniere oevures visitÃ©e + celle en cours
 			lastVisited=(int[]) request.getAttribute("lastVisited");
 			numeroOeuvre=-1;
 			numeroOeuvreTemp=0;
@@ -117,13 +117,13 @@ public class SameAsAffichage extends javax.servlet.http.HttpServlet implements j
 			} catch (ParserConfigurationException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}			
-			
+			}
+
 			//initRedisplay
 			redisplay= "todefine";
 		}
 
-		/*Apres avoir selectionné le fichier d'alignement => page des parametres. Ce passage ne se fera qu'une fois au cours de l'execution*/
+		/*Apres avoir selectionnÃ© le fichier d'alignement => page des parametres. Ce passage ne se fera qu'une fois au cours de l'execution*/
 		if (request.getAttribute("sameAsProp") != null){
 			this.getServletContext().getRequestDispatcher( "/SameAsPropriete.jsp" ).forward( request, response );
 		}
@@ -132,9 +132,9 @@ public class SameAsAffichage extends javax.servlet.http.HttpServlet implements j
 
 		/* Apres la page des parametre => page d'affichage*/
 		else{
-			//Premierement nous allons traiter les différents parametrages..
+			//Premierement nous allons traiter les diffÃ©rents parametrages..
 			//le redisplay des oeuvres deja traitee. Se fait grace a une chaine de caractere.
-			//si la decision de l'oeuvre est contenu dans la String alors l'oeuvre sera affichée.
+			//si la decision de l'oeuvre est contenu dans la String alors l'oeuvre sera affichÃ©e.
 			if (request.getParameter("redisplay")!= null){
 				if (request.getParameter("redisplayRadio").equals("radioS")||request.getParameter("redisplayRadio").equals("radioB")){
 					redisplay+="same";
@@ -143,7 +143,7 @@ public class SameAsAffichage extends javax.servlet.http.HttpServlet implements j
 					redisplay+="different";
 				}
 			}
-			
+
 			/*FILTRAGE*/
 			if(initFiltrage){
 				sou=new StockageOeuvres();
@@ -166,12 +166,12 @@ public class SameAsAffichage extends javax.servlet.http.HttpServlet implements j
 					modeFiltrage=true;
 				}
 			}
-			
+
 			/*RECHERCHE*/
-			//la recherche etant une fonction dynamique du programme, une grande partie du code ci dessous sert a 
+			//la recherche etant une fonction dynamique du programme, une grande partie du code ci dessous sert a
 			//ecrire le resultat en JSON pour le script js
 			if (request.getParameter("researchText")!=null){
-				
+
 				modeRecherche=true;
 				resultat = "{";
 				valeur = request.getParameter("researchText");
@@ -184,7 +184,7 @@ public class SameAsAffichage extends javax.servlet.http.HttpServlet implements j
 				response.setHeader("Cache-Control", "no-cache");
 
 				if(sor.getListeEntity1().size()>0){
-					/*CONSTRUCTION JSON : {"n°oeuvre" : { "n°List" : { "prop1":"val1" , "prop2":"val2"}}.. }*/
+					/*CONSTRUCTION JSON : {"nÂ°oeuvre" : { "nÂ°List" : { "prop1":"val1" , "prop2":"val2"}}.. }*/
 					for ( int i = 0 ; i< sor.getListeEntity1().size();i ++){
 						String URIl1=sor.getListeEntity1().get(i);
 						String URIl2=sor.getListeEntity2().get(i);
@@ -215,11 +215,11 @@ public class SameAsAffichage extends javax.servlet.http.HttpServlet implements j
 					resultat=resultat.substring(0, resultat.length()-1);
 					resultat+="}";
 				}
-				
+
 				else {
 					resultat="{}";
 				}
-				
+
 				response.getWriter().write(resultat);
 				/*if(!request.getParameter(CHAMP_RECHERCHE).trim().equals("")){
 					INNERHTML_FILTRE = request.getParameter(CHAMP_RECHERCHE).trim().split(" ");
@@ -235,7 +235,7 @@ public class SameAsAffichage extends javax.servlet.http.HttpServlet implements j
 				//Si nous ne sommes ni en recherche, ni en filtrage.
 				/*INITCHECKBOX*/
 				//Sert a garder en memoire la configuration d'affichage. A chaque tour de boucle on reinitialise la liste des checkbox.
-				//Puis on verifie lesquels ont été cochees avant de valider (same/different/undecided). Celles-ci seront ajoutees dans la HashMap
+				//Puis on verifie lesquels ont Ã©tÃ© cochees avant de valider (same/different/undecided). Celles-ci seront ajoutees dans la HashMap
 				//Cette HashMap nous dira quelles info afficher pour ce tour de boucle.
 				checkedBox=new HashMap<String,String>();
 				names = request.getParameterNames();
@@ -246,8 +246,8 @@ public class SameAsAffichage extends javax.servlet.http.HttpServlet implements j
 						checkedBox.put(s,"checked");
 					}
 				}
-				
-				//TROUVER UN MOYEN DE REGROUPER TOUT CA	
+
+				//TROUVER UN MOYEN DE REGROUPER TOUT CA
 				//lorsque qu'on fini le filtre et qu'on passe en mode normal, le programme passe 2 fois par ce scriptlet.
 				//et donc enregistre 2 fois d'affiler les infos de validation. pour eviter cela => la variable finFiltrage
 				if(request.getAttribute("finFiltrage")==null){
@@ -262,7 +262,7 @@ public class SameAsAffichage extends javax.servlet.http.HttpServlet implements j
 						so1.getDecision().add(numeroOeuvre,"same" );
 						StockageOeuvres.getListeTripletResultat().remove(numeroOeuvre);
 						StockageOeuvres.getListeTripletResultat().add(numeroOeuvre,"("+URI1+",sameAS,"+URI2+")");
-						//si nous etions sur la derniere oeuvre en cours => on passe a l'oeuvre non traitée suivante
+						//si nous etions sur la derniere oeuvre en cours => on passe a l'oeuvre non traitÃ©e suivante
 						if(StockageOeuvres.compteurNext==StockageOeuvres.compteurTemp){
 							StockageOeuvres.compteurNext+=1;
 							StockageOeuvres.compteurTemp+=1;
@@ -327,7 +327,7 @@ public class SameAsAffichage extends javax.servlet.http.HttpServlet implements j
 
 				while (StockageOeuvres.compteurNext<=StockageOeuvres.compteurTemp && !sp1.getCompositeur().get(so1.getListeEntity1().get(StockageOeuvres.compteurNext)).toLowerCase().contains(INNERHTML_RECHERCHE.toLowerCase())&& !sp2.getCompositeur().get(so1.getListeEntity2().get(StockageOeuvres.compteurNext)).toLowerCase().contains(INNERHTML_RECHERCHE.toLowerCase())){
 
-					StockageOeuvres.compteurNext+=1;			
+					StockageOeuvres.compteurNext+=1;
 				}
 
 				if(StockageOeuvres.compteurNext>=StockageOeuvres.compteurTemp){
@@ -338,7 +338,7 @@ public class SameAsAffichage extends javax.servlet.http.HttpServlet implements j
 			}*/
 
 				/*Pour retourner a une oeuvre precedente via la progress bar*/
-				
+
 				names = request.getParameterNames();
 
 				while (names.hasMoreElements()) {
@@ -370,11 +370,11 @@ public class SameAsAffichage extends javax.servlet.http.HttpServlet implements j
 			}
 			else{
 				start=StockageOeuvres.compteurTemp-4;
-			
+
 			}*/
-				
+
 				if((!modeRetour && !modeRecherche) && request.getParameter(CHAMP_MAJ)==null){
-					
+
 					//Cette partie sert a ne mettre la progress bar a jour que si le couple n'est deja pas dans la progress bar
 					verifList=true;
 					for(int i=0;i<4;i++){
@@ -391,12 +391,12 @@ public class SameAsAffichage extends javax.servlet.http.HttpServlet implements j
 					}
 
 					/*DO NOT DISPLAY A DECIDED COUPLE*/
-					/*Il faut mettre a jour la valeur de numeroOeuvre avant de verifier s'il l'oeuvre a deja été validée ou non*/
-					/*Attention a ce que numeroOeuvre ne dépasse pas la taille de sou*/
+					/*Il faut mettre a jour la valeur de numeroOeuvre avant de verifier s'il l'oeuvre a deja Ã©tÃ© validÃ©e ou non*/
+					/*Attention a ce que numeroOeuvre ne dÃ©passe pas la taille de sou*/
 					if(StockageOeuvres.compteurNext<sou.getListeEntity1().size()){
 						numeroOeuvre = so1.getListeEntity1().indexOf(sou.getListeEntity1().get(StockageOeuvres.compteurNext));
 					}
-					while (StockageOeuvres.compteurTemp<sou.getListeEntity1().size()){ //!\\ EVALUTATION PASSIVE 
+					while (StockageOeuvres.compteurTemp<sou.getListeEntity1().size()){ //!\\ EVALUTATION PASSIVE
 						if (!redisplay.contains(so1.getDecision().get(numeroOeuvre))){
 						StockageOeuvres.compteurNext+=1;
 						StockageOeuvres.compteurTemp+=1;
@@ -406,7 +406,7 @@ public class SameAsAffichage extends javax.servlet.http.HttpServlet implements j
 						}
 						}
 						else{break;}
-					}	
+					}
 				}
 				/*DISPLAY CURRENT SET (CURRENT = StockageOeuvres.compteurNext)*/
 

@@ -15,7 +15,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-/*Cette méthode nous sert juste a écrire le fichier de sortie au format RDF/XML*/
+/*Cette mÃ©thode nous sert juste a Ã©crire le fichier de sortie au format RDF/XML*/
 
 public class ExportResult {
 	public Document doc;

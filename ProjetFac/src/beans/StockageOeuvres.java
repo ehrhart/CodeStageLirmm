@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-/*On va surtout jouer sur les indices pour s'y retrouver : un couple d'oeuvre sera determiné par un indice i.
+/*On va surtout jouer sur les indices pour s'y retrouver : un couple d'oeuvre sera determinÃ© par un indice i.
  * L'oeuvre 1 sera l'indice i de listeEntity1, l'oeuvre 2 sera l'indice i de listeEntity2, la decision sera l'indice i de decision etc..
  */
 public class StockageOeuvres {
@@ -12,7 +12,7 @@ public class StockageOeuvres {
 	private ArrayList<String> listeEntity2=new ArrayList<>();
 	public ArrayList<String> rdfsType = new ArrayList<>();
 	
-	/*Une oeuvre est stocké ainsi : {oeuvre1 - {prop11-obj11, prop12-obj12 ...}, oeuvre2 - {prop21-obj21, prop22-obj22,...},...}*/
+	/*Une oeuvre est stockÃ© ainsi : {oeuvre1 - {prop11-obj11, prop12-obj12 ...}, oeuvre2 - {prop21-obj21, prop22-obj22,...},...}*/
 	private HashMap<String, HashMap<String,String>> oeuvres=new HashMap <>();
 	
 	private static HashMap<String,Double> scoreProp = new HashMap<>();
