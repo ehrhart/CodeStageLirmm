@@ -1,9 +1,6 @@
 package servlets;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -65,7 +62,21 @@ public class SameAsSave extends HttpServlet {
 		sortie.close();
 
 		request.setAttribute("reussi", "Fichier sauvegardé avec succés");
-		this.getServletContext().getRequestDispatcher( "/SameAsValidator.jsp" ).forward( request, response );
+
+		// Export file for download
+		String fileName = "resultat.xml";
+		String contextPath = this.getServletContext().getRealPath(File.separator);
+		//ATTENTION ICI REMPLACER "chemin" PAR LE CHEMINDE STOCKAGE DES RESULTATS !!!
+		File file = new File("chemin/" + fileName);
+		response.setContentType("application/xml");
+		response.addHeader("Content-Disposition", "attachment; filename=" + fileName);
+		response.setContentLength((int) file.length());
+		FileInputStream fileInputStream = new FileInputStream(file);
+		OutputStream responseOutputStream = response.getOutputStream();
+		int bytes;
+		while ((bytes = fileInputStream.read()) != -1) {
+			responseOutputStream.write(bytes);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
