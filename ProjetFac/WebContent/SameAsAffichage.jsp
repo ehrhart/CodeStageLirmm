@@ -24,7 +24,7 @@
 
 <body>
 	<div id="curseur" class="infobulle"></div>
-	
+
 	<div id="affich">
 		<div class="panel panel-primary" style="width: 40%; max-width: 40%">
 			<div class="panel-heading">BNF</div>
@@ -115,21 +115,21 @@
 						<c:set var = "string02" value="${fn:replace(string01, '###', ', ')}"></c:set>
 						<c:set var = "string11" value= "<b>${requestScope[listeProp[1]]}</b>Oeuvre 1:${so1.getOeuvres()[so1.getListeEntity1()[lastV[i]]][so1.getListeProp()[1]]} <br>Oeuvre 2: ${so1.getOeuvres()[so1.getListeEntity2()[lastV[i]]][so1.getListeProp()[1]]}"></c:set>
 						<c:set var = "string12" value="${fn:replace(string11, '###', ', ')}"></c:set>
-						
-						<div onmouseover='montre("${string02}<br><br>${string12 }"); '	onmouseout="cache();" class='progress-bar progress-bar-${!empty(decision[lastV[i]]) ? decision[lastV[i]]: "todefine"}' role='progressbar' style='width: 19%'>
+
+						<div onmouseover='montre("${fn:escapeXml(string02)}<br><br>${fn:escapeXml(string12)}"); '	onmouseout="cache();" class='progress-bar progress-bar-${!empty(decision[lastV[i]]) ? decision[lastV[i]]: "todefine"}' role='progressbar' style='width: 19%'>
 						<input type='submit' value="  " name='return${lastV[i] }'	style='border: none; background: transparent; outline: 0; width: 100%' />
 						</div>
 						<div class='progress-bar' role='progressbar' style='background-color: black; width: 1%; height:22.222px'></div>
 					</c:if>
 				</c:forEach>
-				
+
 				<c:set var = "string01" value= "<b>${requestScope[listeProp[0]]}</b>Oeuvre 1:${so1.getOeuvres()[so1.getListeEntity1()[cptTemp]][so1.getListeProp()[0]]} <br>Oeuvre 2: ${so1.getOeuvres()[so1.getListeEntity2()[cptTemp]][so1.getListeProp()[0]]}"></c:set>
 				<c:set var = "string02" value="${fn:replace(string01, '###', ', ')}"></c:set>
 				<c:set var = "string11" value= "<b>${requestScope[listeProp[1]]}</b>Oeuvre 1:${so1.getOeuvres()[so1.getListeEntity1()[cptTemp]][so1.getListeProp()[1]]} <br>Oeuvre 2: ${so1.getOeuvres()[so1.getListeEntity2()[cptTemp]][so1.getListeProp()[1]]}"></c:set>
 				<c:set var = "string12" value="${fn:replace(string11, '###', ', ')}"></c:set>
-				
+
 				<div
-					onmouseover='montre("${string02}<br><br>${string12 }"); '
+					onmouseover='montre("${fn:escapeXml(string02)}<br><br>${fn:escapeXml(string12)}"); '
 					onmouseout="cache();"
 					class='progress-bar progress-bar-${!empty(decision[cptTemp]) ? decision[cptTemp]: "todefine"}'
 					role='progressbar' style='width: 17.5%'>
@@ -157,7 +157,7 @@
 								<h4 class="modal-title" id="resRec"></h4>
 							</div>
 					<div class="modal-body" id="results" style="overflow-y: scroll;">
-					
+
 					</div>
 					</div>
 				</div>
