@@ -90,6 +90,22 @@ public class SameAsAffichage extends javax.servlet.http.HttpServlet implements j
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+
+			// Export file for download
+			String exportFileName = nomFichier + ".xml";
+			String contextPath = this.getServletContext().getRealPath(File.separator);
+			File file = new File(System.getProperty("java.io.tmpdir") + File.separator + exportFileName);
+			response.setContentType("application/xml");
+			response.addHeader("Content-Disposition", "attachment; filename=" + exportFileName);
+			response.setContentLength((int) file.length());
+			FileInputStream fileInputStream = new FileInputStream(file);
+			OutputStream responseOutputStream = response.getOutputStream();
+			int bytes;
+			while ((bytes = fileInputStream.read()) != -1) {
+				responseOutputStream.write(bytes);
+			}
+
+			return;
 		}
 
 		/*INITIALISATION*/
