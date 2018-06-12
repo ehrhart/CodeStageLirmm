@@ -1,6 +1,6 @@
 package servlets;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.Enumeration;
 import java.util.HashMap;
 
@@ -83,10 +83,9 @@ public class SameAsAffichage extends javax.servlet.http.HttpServlet implements j
 					e.printStackTrace();
 				}
 			}
-			//ATTENTION, ICI REMPLACER "chemin" PAR UN CHEMIN DE SAUVEGARDE!!
 			//sauvegarde au format RDF/XML pour pouvoir relire le fichier plus tard et continuer le travail en cours
 			try {
-				ER.outputXMLtoFile(ER.doc, "chemin"+nomFichier+".xml");
+				ER.outputXMLtoFile(ER.doc, System.getProperty("java.io.tmpdir") + File.separator + nomFichier + ".xml");
 			} catch (TransformerException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

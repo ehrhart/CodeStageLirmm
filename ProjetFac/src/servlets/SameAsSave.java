@@ -34,9 +34,8 @@ public class SameAsSave extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		//ATTENTION ICI REMPLACER "chemin" PAR LE CHEMINDE STOCKAGE DES RESULTATS !!!
 		//celui-ci correspond a un fichier .txt qui contient toutes les "oeuvre1, sameAs, oevure2" validées
-		PrintWriter sortie = new PrintWriter(new BufferedWriter(new FileWriter("chemin/resultat.txt")));
+		PrintWriter sortie = new PrintWriter(new BufferedWriter(new FileWriter(System.getProperty("java.io.tmpdir") + File.separator + "resultat.txt")));
 
 		for(int i = 0; i < aEcrire.size(); i++){
 			if(aEcrire.get(i)!=null){
@@ -50,10 +49,9 @@ public class SameAsSave extends HttpServlet {
 			}
 		}
 
-		//ATTENTION ICI REMPLACER "chemin" PAR LE CHEMINDE STOCKAGE DES RESULTATS !!!
 		//celui-ci est le fichier RDF/XML
 		try {
-			ER.outputXMLtoFile(ER.doc, "chemin/resultat.xml");
+			ER.outputXMLtoFile(ER.doc, System.getProperty("java.io.tmpdir") + File.separator + "resultat.xml");
 		} catch (TransformerException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -64,12 +62,11 @@ public class SameAsSave extends HttpServlet {
 		request.setAttribute("reussi", "Fichier sauvegardé avec succés");
 
 		// Export file for download
-		String fileName = "resultat.xml";
+		String exportFileName = "resultat.xml";
 		String contextPath = this.getServletContext().getRealPath(File.separator);
-		//ATTENTION ICI REMPLACER "chemin" PAR LE CHEMINDE STOCKAGE DES RESULTATS !!!
-		File file = new File("chemin/" + fileName);
+		File file = new File(System.getProperty("java.io.tmpdir") + File.separator + exportFileName);
 		response.setContentType("application/xml");
-		response.addHeader("Content-Disposition", "attachment; filename=" + fileName);
+		response.addHeader("Content-Disposition", "attachment; filename=" + exportFileName);
 		response.setContentLength((int) file.length());
 		FileInputStream fileInputStream = new FileInputStream(file);
 		OutputStream responseOutputStream = response.getOutputStream();
